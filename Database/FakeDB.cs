@@ -40,6 +40,7 @@ namespace TPPizza.Database
                 new Ingredient{Id=8,Nom="Poulet"}
             };
 
+            //initialisation de la liste des pâtes
             this.PatesDisponibles = new List<Pate>
             {
                 new Pate{ Id=1,Nom="Pate fine, base crême"},
@@ -48,6 +49,8 @@ namespace TPPizza.Database
                 new Pate{ Id=4,Nom="Pate épaisse, base tomate"}
             };
 
+            //ajout d'une pizza à la liste pour avoir des données à afficher 
+            //au lancement de l'application
             this.Pizzas = new List<Pizza>()
             {
                 new Pizza{Id=1, Nom="Reine", 

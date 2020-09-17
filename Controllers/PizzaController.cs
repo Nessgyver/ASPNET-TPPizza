@@ -58,17 +58,32 @@ namespace TPPizza.Controllers
         // GET: Pizza/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Pizza pizza = Getpizza(id);
+            PizzaVM pizzaVM = new PizzaVM()
+            {
+                Pizza = pizza,
+                Ingredients = FakeDB.Instance.IngredientsDisponibles,
+                Pates = FakeDB.Instance.PatesDisponibles,
+                IdsIngredients = pizza.Ingredients.Select(pi => pi.Id).ToList(),
+                IdPate = pizza.Pate.Id
+            };
+
+            return View(pizzaVM);
         }
 
         // POST: Pizza/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(PizzaVM pizzaVM)
         {
             try
             {
-                // TODO: Add update logic here
-
+                Pizza pizza = FakeDB.Instance.Pizzas.FirstOrDefault(p=>p.Id == pizzaVM.Pizza.Id);
+                pizza.Nom = pizzaVM.Pizza.Nom;
+                pizza.Pate = FakeDB.Instance.PatesDisponibles.FirstOrDefault(p => p.Id == pizzaVM.IdPate);
+                pizza.Ingredients = FakeDB.Instance.IngredientsDisponibles
+                                            .Where(x=> pizzaVM.IdsIngredients
+                                            .Contains(x.Id))
+                                            .ToList();
                 return RedirectToAction("Index");
             }
             catch
@@ -89,7 +104,7 @@ namespace TPPizza.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                FakeDB.Instance.Pizzas.Remove(Getpizza(id));
 
                 return RedirectToAction("Index");
             }
