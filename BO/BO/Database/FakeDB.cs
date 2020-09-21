@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TPPizza.Database
+namespace BO.Database
 {
     public class FakeDB
     {

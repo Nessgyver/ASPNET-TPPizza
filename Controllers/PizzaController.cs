@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TPPizza.Database;
+using BO.Database;
 using TPPizza.Models;
 
 namespace TPPizza.Controllers
@@ -41,13 +41,21 @@ namespace TPPizza.Controllers
         {
             try
             {
-                pizzaVM.Pizza.Pate = FakeDB.Instance.PatesDisponibles.FirstOrDefault(p => p.Id == pizzaVM.IdPate);
-                foreach (var ingredient in pizzaVM.IdsIngredients)
+                if(ModelState.IsValid)
                 {
-                    pizzaVM.Pizza.Ingredients.Add(FakeDB.Instance.IngredientsDisponibles.FirstOrDefault(i=>i.Id == ingredient));
+                    pizzaVM.Pizza.Pate = FakeDB.Instance.PatesDisponibles.FirstOrDefault(p => p.Id == pizzaVM.IdPate);
+                    foreach (var ingredient in pizzaVM.IdsIngredients)
+                    {
+                        pizzaVM.Pizza.Ingredients.Add(FakeDB.Instance.IngredientsDisponibles.FirstOrDefault(i => i.Id == ingredient));
+                    }
+                    FakeDB.Instance.Pizzas.Add(pizzaVM.Pizza);
+                    return RedirectToAction("Index");
                 }
-                FakeDB.Instance.Pizzas.Add(pizzaVM.Pizza);
-                return RedirectToAction("Index");
+                else 
+                {
+                    return View(Update(pizzaVM));
+                }
+                
             }
             catch
             {
@@ -77,14 +85,22 @@ namespace TPPizza.Controllers
         {
             try
             {
-                Pizza pizza = FakeDB.Instance.Pizzas.FirstOrDefault(p=>p.Id == pizzaVM.Pizza.Id);
-                pizza.Nom = pizzaVM.Pizza.Nom;
-                pizza.Pate = FakeDB.Instance.PatesDisponibles.FirstOrDefault(p => p.Id == pizzaVM.IdPate);
-                pizza.Ingredients = FakeDB.Instance.IngredientsDisponibles
-                                            .Where(x=> pizzaVM.IdsIngredients
-                                            .Contains(x.Id))
-                                            .ToList();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    Pizza pizza = FakeDB.Instance.Pizzas.FirstOrDefault(p => p.Id == pizzaVM.Pizza.Id);
+                    pizza.Nom = pizzaVM.Pizza.Nom;
+                    pizza.Pate = FakeDB.Instance.PatesDisponibles.FirstOrDefault(p => p.Id == pizzaVM.IdPate);
+                    pizza.Ingredients = FakeDB.Instance.IngredientsDisponibles
+                                                .Where(x => pizzaVM.IdsIngredients
+                                                .Contains(x.Id))
+                                                .ToList();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(Update(pizzaVM));
+                }
+                
             }
             catch
             {
@@ -120,5 +136,11 @@ namespace TPPizza.Controllers
             return FakeDB.Instance.Pizzas.Where(p => p.Id == id).FirstOrDefault();
         }
 
+        private PizzaVM Update(PizzaVM pizzaVM)
+        {
+            pizzaVM.Ingredients = FakeDB.Instance.IngredientsDisponibles;
+            pizzaVM.Pates = FakeDB.Instance.PatesDisponibles;
+            return pizzaVM;
+        }
     }
 }

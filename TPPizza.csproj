@@ -122,7 +122,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PizzaController.cs" />
-    <Compile Include="Database\FakeDB.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -189,10 +188,6 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TPChat\TPChat.csproj">
-      <Project>{29F00138-2521-4930-B887-CEFD9DC13609}</Project>
-      <Name>TPChat</Name>
-    </ProjectReference>
     <ProjectReference Include="BO\BO\BO.csproj">
       <Project>{6066eaaa-6025-49bc-a1f3-fc6447c42cd9}</Project>
       <Name>BO</Name>

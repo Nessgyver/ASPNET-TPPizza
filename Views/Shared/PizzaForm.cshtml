@@ -21,9 +21,10 @@
                 @Html.DropDownListFor(model => model.IdPate,
                                         Model.Pates.Select(
                                             x => new SelectListItem() { Text = x.Nom, Value = x.Id.ToString() }),
+                                        "Veuillez selectionner une pâte",
                                         new { htmlAttributes = new { @class = "form-control" } }
                                         )
-                @Html.ValidationMessageFor(model => model.Pizza.Pate, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.IdPate, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -35,7 +36,7 @@
                                             x => new SelectListItem() { Text = x.Nom, Value = x.Id.ToString() }),
                                         new { htmlAttributes = new { @class = "form-control" } }
                                         )
-                @Html.ValidationMessageFor(model => model.Pizza.Ingredients, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.IdsIngredients, "", new { @class = "text-danger" })
             </div>
         </div>
 

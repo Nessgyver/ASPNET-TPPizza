@@ -85,6 +85,3 @@ C:\Users\drouxel2020\source\repos\DemoASPnetMVC\TPPizza\obj\Debug\TPPizza.csproj
 C:\Users\drouxel2020\source\repos\DemoASPnetMVC\TPPizza\obj\Debug\TPPizza.csproj.CopyComplete
 C:\Users\drouxel2020\source\repos\DemoASPnetMVC\TPPizza\obj\Debug\TPPizza.dll
 C:\Users\drouxel2020\source\repos\DemoASPnetMVC\TPPizza\obj\Debug\TPPizza.pdb
-C:\Users\drouxel2020\source\repos\DemoASPnetMVC\TPPizza\bin\TPChat.dll
-C:\Users\drouxel2020\source\repos\DemoASPnetMVC\TPPizza\bin\TPChat.pdb
-C:\Users\drouxel2020\source\repos\DemoASPnetMVC\TPPizza\bin\TPChat.dll.config
